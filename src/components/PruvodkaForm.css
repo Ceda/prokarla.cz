@@ -1,0 +1,280 @@
+/* Editor blocks inside label-editor */
+.label-form {
+  background: #f9f9f9;
+  border-radius: 8px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.label-form h3 {
+  font-size: 15px;
+  margin-bottom: 12px;
+  color: #444;
+}
+
+.form-row {
+  margin-bottom: 12px;
+}
+
+.form-row label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: #555;
+  margin-bottom: 4px;
+}
+
+.form-input {
+  width: 100%;
+  padding: 8px 10px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 13px;
+  transition: border-color 0.2s;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Items table */
+.items-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 12px;
+}
+
+.items-table th {
+  text-align: left;
+  padding: 6px 8px;
+  background: #eee;
+  font-weight: 600;
+  color: #555;
+  border-radius: 4px 4px 0 0;
+}
+
+.items-table td {
+  padding: 4px;
+}
+
+.table-input {
+  width: 100%;
+  padding: 6px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 12px;
+}
+
+.table-input:focus {
+  outline: none;
+  border-color: #667eea;
+}
+
+/* Preview page styles (shared with print) */
+.pruvodka-page {
+  font-family: Roboto, 'Times New Roman', Arial, sans-serif;
+  color: #333333;
+  line-height: 1.2;
+  padding: 10mm;
+  background: white;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 100%;
+  overflow: hidden;
+}
+
+/* Header section */
+.pruvodka-page .header-section {
+  position: relative;
+  margin-bottom: 8mm;
+  min-height: 30mm;
+}
+
+.pruvodka-page .logo-img {
+  position: absolute;
+  top: -2mm;
+  right: 0;
+  width: 55mm;
+  height: auto;
+}
+
+.pruvodka-page .title-text {
+  font-size: 30pt;
+  font-weight: bold;
+  padding-right: 60mm;
+}
+
+/* Address */
+.pruvodka-page .address-line {
+  font-size: 11pt;
+  margin-bottom: 2mm;
+}
+
+.pruvodka-page .address-label {
+  font-weight: normal;
+}
+
+.pruvodka-page .address-bold {
+  font-weight: bold;
+}
+
+/* Instructions */
+.pruvodka-page .important-line {
+  font-size: 11pt;
+  font-weight: bold;
+  margin-bottom: 2mm;
+}
+
+.pruvodka-page .instruction-line {
+  font-size: 11pt;
+  margin-bottom: 2mm;
+}
+
+.pruvodka-page .fill-line {
+  font-size: 11pt;
+  font-weight: bold;
+  margin-top: 6mm;
+  margin-bottom: 3mm;
+}
+
+/* Order blocks */
+.pruvodka-page .order-block {
+  margin-bottom: 5mm;
+  page-break-inside: avoid;
+}
+
+.pruvodka-page .order-number-line {
+  font-size: 11pt;
+  font-weight: bold;
+  margin-bottom: 3mm;
+}
+
+.pruvodka-page .order-number-dots {
+  color: #999;
+  font-weight: normal;
+}
+
+/* Table header */
+.pruvodka-page .table-header {
+  display: flex;
+  padding-left: 4mm;
+  margin-bottom: 2mm;
+}
+
+.pruvodka-page .col-code {
+  width: 35%;
+  margin-left: 5%;
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+.pruvodka-page .col-name {
+  width: 60%;
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+/* Table rows */
+.pruvodka-page .table-row {
+  display: flex;
+  padding-left: 4mm;
+  margin-bottom: 2mm;
+}
+
+.pruvodka-page .row-num {
+  width: 5%;
+  font-size: 11pt;
+  font-weight: bold;
+}
+
+.pruvodka-page .row-code {
+  width: 35%;
+  font-size: 11pt;
+}
+
+.pruvodka-page .row-name {
+  width: 60%;
+  font-size: 11pt;
+}
+
+.pruvodka-page .dots {
+  color: #999;
+}
+
+/* Page management in form */
+.page-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 0 6px 0;
+  border-top: 2px solid #d0d7e3;
+  margin-top: 8px;
+}
+
+.page-header-row:first-child {
+  border-top: none;
+  margin-top: 0;
+}
+
+.page-label {
+  font-size: 14px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.remove-page-btn {
+  background: #fee2e2;
+  color: #c33;
+  border: 1px solid #fca5a5;
+  border-radius: 5px;
+  padding: 4px 10px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.remove-page-btn:hover {
+  background: #fca5a5;
+}
+
+.add-page-btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 10px;
+  background: transparent;
+  color: #0066cc;
+  border: 1px dashed #0066cc;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.add-page-btn:hover {
+  background: #f0f6ff;
+}
+
+/* Screen-only page divider in preview */
+.page-divider-screen {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 20px 0 12px 0;
+  font-size: 13px;
+  font-weight: 600;
+  color: #888;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.page-divider-screen::before,
+.page-divider-screen::after {
+  content: '';
+  flex: 1;
+  height: 1px;
+  background: #ddd;
+}
