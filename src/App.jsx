@@ -3,16 +3,25 @@ import LabelForm from './components/LabelForm'
 import LabelPreview from './components/LabelPreview'
 import PruvodkaForm from './components/PruvodkaForm'
 import PruvodkaPreview from './components/PruvodkaPreview'
+import HomePage from './components/HomePage'
 import { generateBarcode } from './utils/barcode'
 import { generateLabelHtml, generateMultiLabelPrintHtml } from './utils/labelTemplate'
+import { downloadLabelPdf } from './utils/pdfExport'
 import './App.css'
 
 function App() {
+  const [view, setView] = useState('home') // 'home' | 'label' | 'pruvodka'
   const [activeTab, setActiveTab] = useState('label') // 'label' | 'pruvodka'
   const [labelData, setLabelData] = useState(null)
   const [generatedHtmls, setGeneratedHtmls] = useState([])
   const [pruvodkaPages, setPruvodkaPages] = useState(null)
   const [showAbout, setShowAbout] = useState(false)
+  const [generatingLabelPdf, setGeneratingLabelPdf] = useState(false)
+
+  const navigate = (destination) => {
+    setView(destination)
+    setActiveTab(destination === 'pruvodka' ? 'pruvodka' : 'label')
+  }
 
   useEffect(() => {
     if (activeTab === 'label' && labelData) {
@@ -38,6 +47,15 @@ function App() {
     }
   }
 
+  const handleLabelDownloadPdf = async () => {
+    setGeneratingLabelPdf(true)
+    try {
+      await downloadLabelPdf(generatedHtmls)
+    } finally {
+      setGeneratingLabelPdf(false)
+    }
+  }
+
   const handleLabelPrint = () => {
     if (!generatedHtmls.length) return
     const printWindow = window.open('', '_blank')
@@ -53,18 +71,20 @@ function App() {
       <header className="app-header">
         <div className="header-container">
         <div className="header-left">
-          <a href="/"><img src="/logo.png" alt="ProKarla.cz" className="header-logo" /></a>
+          <button className="header-logo-btn" onClick={() => setView('home')}>
+            <img src="/logo.png" alt="ProKarla.cz" className="header-logo" />
+          </button>
           <span className="header-divider" />
           <nav className="tabs">
             <button
-              className={`tab ${activeTab === 'label' ? 'active' : ''}`}
-              onClick={() => setActiveTab('label')}
+              className={`tab ${activeTab === 'label' && view !== 'home' ? 'active' : ''}`}
+              onClick={() => navigate('label')}
             >
               📦 Přepravní štítek
             </button>
             <button
-              className={`tab ${activeTab === 'pruvodka' ? 'active' : ''}`}
-              onClick={() => setActiveTab('pruvodka')}
+              className={`tab ${activeTab === 'pruvodka' && view !== 'home' ? 'active' : ''}`}
+              onClick={() => navigate('pruvodka')}
             >
               📋 Průvodka vrácení zboží
             </button>
@@ -76,7 +96,9 @@ function App() {
         </div>
       </header>
 
-      <div className="app-content">
+      {view === 'home' && <HomePage onNavigate={navigate} />}
+
+      <div className="app-content" style={{ display: view === 'home' ? 'none' : undefined }}>
         {activeTab === 'pruvodka' ? (
           <div className="label-container">
             <div className="label-editor">
@@ -99,12 +121,22 @@ function App() {
               <div className="preview-section">
                 <div className="preview-header">
                   <h2>Náhled štítků ({generatedHtmls.length})</h2>
-                  <button
-                    className="print-button"
-                    onClick={handleLabelPrint}
-                  >
-                    🖨️ Tisk
-                  </button>
+                  <div style={{ display: 'flex', gap: '8px' }}>
+                    <button
+                      className="print-button"
+                      onClick={handleLabelPrint}
+                    >
+                      🖨️ Tisk
+                    </button>
+                    <button
+                      className="print-button"
+                      style={{ background: '#0066cc' }}
+                      onClick={handleLabelDownloadPdf}
+                      disabled={generatingLabelPdf}
+                    >
+                      {generatingLabelPdf ? '⏳ Generuji...' : '📥 Stáhnout PDF'}
+                    </button>
+                  </div>
                 </div>
                 <LabelPreview htmls={generatedHtmls} />
               </div>

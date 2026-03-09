@@ -2,12 +2,15 @@
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  background: #f4f6f8;
+  background: linear-gradient(160deg, #f8fdf8 0%, #f0f4f0 100%);
+  background-attachment: fixed;
 }
 
 .app-header {
   background: white;
   box-shadow: 0 1px 0 #e5e7eb;
+  position: relative;
+  z-index: 1;
 }
 
 .header-container {
@@ -27,10 +30,26 @@
   gap: 0;
 }
 
+.header-logo-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  margin-right: 16px;
+  border-radius: 4px;
+  transition: opacity 0.15s;
+}
+
+.header-logo-btn:hover {
+  opacity: 0.75;
+}
+
 .header-logo {
   height: 28px;
   width: auto;
-  margin-right: 16px;
+  display: block;
 }
 
 .header-divider {
