@@ -84,7 +84,7 @@ function App() {
               className={`tab ${activeTab === 'pruvodka' && view !== 'home' ? 'active' : ''}`}
               onClick={() => navigate('pruvodka')}
             >
-              📋 Průvodka vrácení zboží
+              📋 <span className="tab-full">Průvodka vrácení zboží</span><span className="tab-short"> Průvodka</span>
             </button>
           </nav>
         </div>
