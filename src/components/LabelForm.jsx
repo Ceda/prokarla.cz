@@ -35,7 +35,7 @@ function LabelForm({ onDataChange }) {
       recipientStreet: 'Bieblova 1202',
       recipientCity: 'Hradec Králové',
       recipientZip: '500 03',
-      instructions: 'Odpovědní zásilku použijte k vracení nevhodného zboží z e-shopu ProKarla.cz.',
+      instructions: 'Odpovědní zásilku použijte k vracení nevhodného zboží z e-shopu OdKarla.cz.',
       footerText: 'Odpovědní zásilka - cenu hradí adresát'
     }
   })

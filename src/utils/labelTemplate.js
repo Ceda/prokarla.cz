@@ -27,7 +27,7 @@ export const generateLabelHtml = (data, barcodeDataUrl) => {
       <div class="top-row">
         <div class="ceska-posta">Česká pošta</div>
         <div class="top-instructions">
-          <div>${instructions || 'Odpovědní zásilku použijte k vracení nevhodného zboží z e-shopu ProKarla.cz.'}</div>
+          <div>${instructions || 'Odpovědní zásilku použijte k vracení nevhodného zboží z e-shopu OdKarla.cz.'}</div>
           <div>Tato zásilka je pro vás zdarma.</div>
         </div>
       </div>
