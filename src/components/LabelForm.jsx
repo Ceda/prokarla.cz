@@ -81,6 +81,13 @@ function LabelForm({ onDataChange }) {
       <div className="label-form">
         <div className="form-section">
           <h3>📦 Tracking čísla</h3>
+          <p className="tracking-info">
+            Nemáš tracking číslo?{' '}
+            <a href="https://www.odkarla.cz/sos" target="_blank" rel="noopener noreferrer">
+              Vytvoř případ na odkarla.cz/sos
+            </a>
+            {' '}a od podpory získáš své trackovací číslo.
+          </p>
           {trackingNumbers.map((tn, i) => (
             <div key={i} className="tracking-row">
               <span className="tracking-index">{i + 1}.</span>

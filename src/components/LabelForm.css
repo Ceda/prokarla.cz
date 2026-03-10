@@ -16,6 +16,21 @@
   border-bottom: none;
 }
 
+.tracking-info {
+  font-size: 13px;
+  color: #666;
+  background: #f5f5f5;
+  border-left: 3px solid #aaa;
+  padding: 8px 12px;
+  margin: 0 0 12px 0;
+  border-radius: 0 4px 4px 0;
+}
+
+.tracking-info a {
+  color: #e05c2e;
+  text-decoration: underline;
+}
+
 .form-section h3 {
   margin: 0 0 12px 0;
   font-size: 16px;
