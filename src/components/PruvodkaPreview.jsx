@@ -1,3 +1,5 @@
+import { useState } from 'react'
+import { downloadPruvodkaPdf } from '../utils/pdfExport'
 import './PruvodkaForm.css'
 
 function PageContent({ orders }) {
@@ -60,6 +62,17 @@ function PageContent({ orders }) {
 }
 
 function PruvodkaPreview({ pages }) {
+  const [generating, setGenerating] = useState(false)
+
+  const handleDownloadPdf = async () => {
+    setGenerating(true)
+    try {
+      await downloadPruvodkaPdf()
+    } finally {
+      setGenerating(false)
+    }
+  }
+
   const handlePrint = () => {
     const printContent = document.getElementById('pruvodka-print-content')
     if (!printContent) return
@@ -209,9 +222,19 @@ function PruvodkaPreview({ pages }) {
     <div className="preview-section">
       <div className="preview-header">
         <h2>Náhled průvodky</h2>
-        <button className="print-button" onClick={handlePrint}>
-          🖨️ Tisk
-        </button>
+        <div style={{ display: 'flex', gap: '8px' }}>
+          <button className="print-button" onClick={handlePrint}>
+            🖨️ Tisk
+          </button>
+          <button
+            className="print-button"
+            style={{ background: '#0066cc' }}
+            onClick={handleDownloadPdf}
+            disabled={generating}
+          >
+            {generating ? '⏳ Generuji...' : '📥 Stáhnout PDF'}
+          </button>
+        </div>
       </div>
 
       {/* Screen view — pages separated by dividers */}
