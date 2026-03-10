@@ -227,6 +227,7 @@ function LabelForm({ onDataChange }) {
           </div>
         </div>
       </div>
+
     </div>
   )
 }

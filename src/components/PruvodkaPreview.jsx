@@ -41,20 +41,17 @@ function PageContent({ orders }) {
             <div className="col-name">Název zboží</div>
           </div>
 
-          {[0, 1, 2, 3, 4].map((itemIndex) => {
-            const item = order.items[itemIndex]
-            return (
-              <div key={itemIndex} className="table-row">
-                <div className="row-num">{itemIndex + 1}.</div>
-                <div className="row-code">
-                  {item?.code || <span className="dots">…………………………………………….</span>}
-                </div>
-                <div className="row-name">
-                  {item?.name || <span className="dots">……………………………………………………………………………..…………………..</span>}
-                </div>
+          {order.items.map((item, itemIndex) => (
+            <div key={itemIndex} className="table-row">
+              <div className="row-num">{itemIndex + 1}.</div>
+              <div className="row-code">
+                {item?.code || <span className="dots">…………………………………………….</span>}
               </div>
-            )
-          })}
+              <div className="row-name">
+                {item?.name || <span className="dots">……………………………………………………………………………..…………………..</span>}
+              </div>
+            </div>
+          ))}
         </div>
       ))}
     </>
