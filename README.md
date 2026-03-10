@@ -1,108 +1,65 @@
-# GLS Generátor přepravních štítků
+# ProKarla.cz — Generátor přepravních dokladů
 
-Aplikace pro generování GLS přepravních štítků s čárovými kódy.
+Webová aplikace pro generování přepravních dokumentů při vracení zboží z e-shopu [ProKarla.cz](https://prokarla.cz). Běží kompletně v prohlížeči — bez instalace, bez backendu.
 
-## Funkce
+## Co aplikace umí
 
-- Generování štítků ve formátu A6 (100mm × 150mm)
-- Code 128 čárový kód
-- Informace o odesílateli a příjemci
-- Detaily zásilky (počet balíků, hmotnost, služba)
-- Tisk štítku přímo z prohlížeče
+### 📦 Přepravní štítek
+- Štítek formátu A6 (148 × 105 mm) pro Českou poštu — odpovědní zásilka
+- Automatické generování čárového kódu (Code 128) z tracking čísla
+- Hromadné generování — více štítků najednou
+- Tisk přímo z prohlížeče nebo stažení jako PDF
+- Údaje odesílatele se ukládají do localStorage
+
+### 📋 Průvodka vrácení zboží
+- Dokument formátu A4 s přehledem vrácených položek
+- Více objednávek na jedné průvodce, více průvodek najednou
+- Tisk nebo stažení jako PDF
+
+## Proč tento nástroj vznikl
+
+Původní proces vrácení zboží vyžadoval vyplňování DOCX/PDF šablon v externím softwaru. Při tisku docházelo ke ztrátě české diakritiky. Tento nástroj řeší obojí — vše funguje přímo v prohlížeči s garantovanou diakritikou.
 
 ## Technologie
 
-**Backend:**
-- Node.js + Express
-- bwip-js (generování čárových kódů)
+- **React 18** + Vite
+- **JsBarcode** — generování čárových kódů
+- **jsPDF + html2canvas** — export do PDF
+- Čistě frontendová aplikace (žádný backend)
 
-**Frontend:**
-- React 18
-- Vite
-- Axios
-
-## Instalace a spuštění
-
-### 1. Instalace backendu
+## Spuštění
 
 ```bash
-cd backend
-npm install
-npm start
-```
-
-Backend běží na `http://localhost:3001`
-
-### 2. Instalace frontendu
-
-```bash
-cd frontend
 npm install
 npm run dev
 ```
 
-Frontend běží na `http://localhost:3000`
+Aplikace běží na `http://localhost:8081`
 
-## Použití
+## Build
 
-1. Otevřete aplikaci v prohlížeči: `http://localhost:3000`
-2. Vyplňte formulář s údaji o zásilce
-3. Klikněte na "Generovat štítek"
-4. V náhledu uvidíte generovaný štítek
-5. Klikněte na "Tisk" pro vytisknutí štítku
-
-## Formát štítku
-
-- Rozměry: 100mm × 150mm (A6)
-- Formát tisku: doporučeno nastavit jako A6 v tiskových předvolbách
+```bash
+npm run build
+```
 
 ## Struktura projektu
 
 ```
-label-generator/
-├── backend/
-│   ├── server.js          # Express server s API
-│   └── package.json
-└── frontend/
-    ├── src/
-    │   ├── components/
-    │   │   ├── LabelForm.jsx
-    │   │   ├── LabelForm.css
-    │   │   ├── LabelPreview.jsx
-    │   │   └── LabelPreview.css
-    │   ├── App.jsx
-    │   ├── App.css
-    │   ├── main.jsx
-    │   └── index.css
-    ├── index.html
-    ├── vite.config.js
-    └── package.json
+src/
+├── components/
+│   ├── HomePage.jsx        # Úvodní stránka
+│   ├── LabelForm.jsx       # Formulář přepravního štítku
+│   ├── LabelPreview.jsx    # Náhled štítku
+│   ├── PruvodkaForm.jsx    # Formulář průvodky
+│   └── PruvodkaPreview.jsx # Náhled + tisk průvodky
+├── utils/
+│   ├── barcode.js          # Generování čárových kódů
+│   ├── labelTemplate.js    # HTML šablona štítku
+│   └── pdfExport.js        # Export do PDF
+├── App.jsx
+└── App.css
 ```
 
-## API endpointy
+## Autor
 
-### `GET /api/barcode/:text`
-Vrací čárový kód jako base64 obrázek.
-
-### `POST /api/label`
-Generuje HTML štítek.
-
-Request body:
-```json
-{
-  "trackingNumber": "DR2722082180C",
-  "senderName": "Firma s.r.o.",
-  "senderStreet": "Ulice 123",
-  "senderZip": "11000",
-  "senderCity": "Praha 1",
-  "senderCountry": "Czech Republic",
-  "recipientName": "Jan Novák",
-  "recipientStreet": "Hlavní 456",
-  "recipientZip": "12000",
-  "recipientCity": "Praha 2",
-  "recipientCountry": "Czech Republic",
-  "pieces": "1",
-  "weight": "0.5",
-  "service": "Garantovaná doba dodání do 12:00hod"
-}
-```
+Vytvořil [Antonín Pleskač](https://blog.antoninpleskac.cz/) — © 2026

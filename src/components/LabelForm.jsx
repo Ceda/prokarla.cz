@@ -1,22 +1,43 @@
 import { useState, useEffect } from 'react'
 import './LabelForm.css'
 
+const SENDER_STORAGE_KEY = 'labelgen_sender'
+
+const SENDER_FIELDS = ['senderName', 'senderStreet', 'senderCity', 'senderZip', 'senderPhone', 'senderPostOfficeZip']
+
+function loadSavedSender() {
+  try {
+    const saved = localStorage.getItem(SENDER_STORAGE_KEY)
+    return saved ? JSON.parse(saved) : {}
+  } catch {
+    return {}
+  }
+}
+
+function saveSender(data) {
+  const senderData = Object.fromEntries(SENDER_FIELDS.map(k => [k, data[k] ?? '']))
+  localStorage.setItem(SENDER_STORAGE_KEY, JSON.stringify(senderData))
+}
+
 function LabelForm({ onDataChange }) {
   const [trackingNumbers, setTrackingNumbers] = useState(['DR2722082281C'])
-  const [formData, setFormData] = useState({
-    senderName: '',
-    senderStreet: '',
-    senderCity: '',
-    senderZip: '',
-    senderPhone: '',
-    senderPostOfficeZip: '',
-    weight: '',
-    recipientName: 'ProKarla.cz',
-    recipientStreet: 'Bieblova 1202',
-    recipientCity: 'Hradec Králové',
-    recipientZip: '500 03',
-    instructions: 'Odpovědní zásilku použijte k vracení nevhodného zboží z e-shopu ProKarla.cz.',
-    footerText: 'Odpovědní zásilka - cenu hradí adresát'
+  const [formData, setFormData] = useState(() => {
+    const saved = loadSavedSender()
+    return {
+      senderName: saved.senderName ?? '',
+      senderStreet: saved.senderStreet ?? '',
+      senderCity: saved.senderCity ?? '',
+      senderZip: saved.senderZip ?? '',
+      senderPhone: saved.senderPhone ?? '',
+      senderPostOfficeZip: saved.senderPostOfficeZip ?? '',
+      weight: '',
+      recipientName: 'OdKarla.cz',
+      recipientStreet: 'Bieblova 1202',
+      recipientCity: 'Hradec Králové',
+      recipientZip: '500 03',
+      instructions: 'Odpovědní zásilku použijte k vracení nevhodného zboží z e-shopu ProKarla.cz.',
+      footerText: 'Odpovědní zásilka - cenu hradí adresát'
+    }
   })
 
   const notify = (data, numbers) => {
@@ -27,6 +48,7 @@ function LabelForm({ onDataChange }) {
     const { name, value } = e.target
     const newData = { ...formData, [name]: value }
     setFormData(newData)
+    if (SENDER_FIELDS.includes(name)) saveSender(newData)
     notify(newData, trackingNumbers)
   }
 

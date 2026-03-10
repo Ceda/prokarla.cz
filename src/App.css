@@ -28,6 +28,8 @@
   display: flex;
   align-items: center;
   gap: 0;
+  flex: 1;
+  min-width: 0;
 }
 
 .header-logo-btn {
@@ -62,6 +64,9 @@
 
 .tabs {
   display: flex;
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
 }
 
 .tab {
@@ -91,18 +96,14 @@
 }
 
 .app-content {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
-  padding: 20px;
-  max-width: 1800px;
-  margin: 0 auto;
   flex: 1;
+  padding: 20px;
 }
 
 .label-editor {
   flex: 0 0 450px;
   max-width: 450px;
+  min-width: 0;
   background: white;
   border-radius: 12px;
   padding: 24px;
@@ -118,23 +119,25 @@
 
 .label-container {
   display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
-  padding: 20px;
-  max-width: 1800px;
+  max-width: 1760px;
   margin: 0 auto;
   width: 100%;
 }
 
 .preview-section {
-  flex: 1;
-  min-width: 786px;
+  flex: 1 1 500px;
+  min-width: 0;
+  max-width: 860px;
   display: flex;
   flex-direction: column;
   background: white;
   border-radius: 12px;
   padding: 24px;
   box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-  max-height: calc(100vh - 40px);
+  max-height: calc(100vh - 92px);
   overflow: auto;
 }
 
@@ -381,21 +384,79 @@
   padding-top: 2mm;
 }
 
-@media (max-width: 1200px) {
-  .app-content {
-    flex-direction: column;
+@media (max-width: 1100px) {
+  .label-editor {
+    flex: 1 1 100%;
+    max-width: 100%;
   }
 
-  .label-editor,
   .preview-section {
-    max-width: 100%;
-    min-width: 100%;
+    flex: 1 1 100%;
+    max-height: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .header-container {
+    padding: 0 12px;
+  }
+
+  .tabs {
+    overflow-x: auto;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+  }
+
+  .tabs::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tab {
+    padding: 0 12px;
+    font-size: 13px;
+  }
+
+  .app-content {
+    padding: 12px;
+  }
+
+  .label-container {
+    gap: 12px;
+  }
+
+  .label-editor {
+    padding: 16px;
+  }
+
+  .preview-section {
+    padding: 16px;
   }
 
   .preview-header {
     flex-direction: column;
     gap: 10px;
+    align-items: flex-start;
+  }
+
+  .preview-header > div {
+    width: 100%;
+    display: flex;
+    gap: 8px;
+  }
+
+  .print-button {
+    flex: 1;
     text-align: center;
+    padding: 10px 8px;
+    font-size: 13px;
+  }
+
+  /* Skrýt náhledy na mobilu — jen tlačítka */
+  .label-document,
+  .pruvodka-page,
+  .page-divider-screen {
+    display: none;
   }
 }
 
@@ -447,24 +508,58 @@
   }
 }
 
-/* About button */
-.about-button {
-  background: transparent;
-  color: #888;
-  border: none;
-  padding: 0 12px;
-  height: 52px;
+/* Footer */
+.app-footer {
+  text-align: center;
+  padding: 16px;
   font-size: 13px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: color 0.15s;
+  color: #aaa;
   display: flex;
   align-items: center;
-  white-space: nowrap;
+  justify-content: center;
+  gap: 8px;
 }
 
-.about-button:hover {
+.app-footer a {
+  color: #aaa;
+  text-decoration: none;
+  transition: color 0.15s;
+}
+
+.app-footer a:hover {
   color: #50b848;
+}
+
+.footer-github {
+  display: flex;
+  align-items: center;
+  line-height: 1;
+}
+
+/* About button */
+.about-button {
+  display: none;
+}
+
+@media (min-width: 1024px) {
+  .about-button {
+    background: transparent;
+    color: #888;
+    border: none;
+    padding: 0 12px;
+    height: 52px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.15s;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .about-button:hover {
+    color: #50b848;
+  }
 }
 
 /* Modal styles */
