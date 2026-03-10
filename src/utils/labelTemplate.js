@@ -19,7 +19,7 @@ export const generateLabelHtml = (data, barcodeDataUrl) => {
     footerText
   } = data
 
-  const tracking = trackingNumber || 'DR2722082281C'
+  const tracking = trackingNumber || ''
 
   return `
     <div class="label">
@@ -80,7 +80,7 @@ export const generateLabelHtml = (data, barcodeDataUrl) => {
           <div class="barcode-section">
             <div class="dr-label">DR</div>
             <div class="barcode-wrapper">
-              <img src="${barcodeDataUrl}" alt="Barcode" class="barcode-img">
+              ${barcodeDataUrl ? `<img src="${barcodeDataUrl}" alt="Barcode" class="barcode-img">` : ''}
               <div class="tracking-number">${tracking}</div>
             </div>
           </div>

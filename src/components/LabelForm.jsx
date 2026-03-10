@@ -20,7 +20,7 @@ function saveSender(data) {
 }
 
 function LabelForm({ onDataChange }) {
-  const [trackingNumbers, setTrackingNumbers] = useState(['DR2722082281C'])
+  const [trackingNumbers, setTrackingNumbers] = useState([''])
   const [formData, setFormData] = useState(() => {
     const saved = loadSavedSender()
     return {

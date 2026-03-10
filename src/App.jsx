@@ -30,13 +30,11 @@ function App() {
   }, [labelData, activeTab])
 
   const generateAllLabels = async (data) => {
-    const trackingNumbers = data.trackingNumbers?.length
-      ? data.trackingNumbers
-      : ['DR2722082281C']
+    const trackingNumbers = data.trackingNumbers?.length ? data.trackingNumbers : ['']
     try {
       const htmls = await Promise.all(
         trackingNumbers.map(async (tn) => {
-          const tracking = tn || 'DR2722082281C'
+          const tracking = tn
           const barcodeDataUrl = await generateBarcode(tracking)
           return generateLabelHtml({ ...data, trackingNumber: tracking }, barcodeDataUrl)
         })
